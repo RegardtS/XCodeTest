@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CE6C035718DDDE7A0024D20E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE6C035618DDDE7A0024D20E /* main.cpp */; };
 		CE6C035918DDDE7A0024D20E /* TestGitProject.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE6C035818DDDE7A0024D20E /* TestGitProject.1 */; };
+		CE6C036018DDE4090024D20E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C035F18DDE4090024D20E /* OpenGL.framework */; };
+		CE6C036218DDE40E0024D20E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C036118DDE40E0024D20E /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,8 @@
 		CE6C035318DDDE7A0024D20E /* TestGitProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGitProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6C035618DDDE7A0024D20E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CE6C035818DDDE7A0024D20E /* TestGitProject.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestGitProject.1; sourceTree = "<group>"; };
+		CE6C035F18DDE4090024D20E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		CE6C036118DDE40E0024D20E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6C036218DDE40E0024D20E /* GLUT.framework in Frameworks */,
+				CE6C036018DDE4090024D20E /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,8 @@
 		CE6C034A18DDDE7A0024D20E = {
 			isa = PBXGroup;
 			children = (
+				CE6C036118DDE40E0024D20E /* GLUT.framework */,
+				CE6C035F18DDE4090024D20E /* OpenGL.framework */,
 				CE6C035518DDDE7A0024D20E /* TestGitProject */,
 				CE6C035418DDDE7A0024D20E /* Products */,
 			);
