@@ -101,8 +101,22 @@ void display() {
 	glRotatef(xViewAngle, 1, 0, 0);
 	glRotatef(yViewAngle, 0, 1, 0);
 	glRotatef(zViewAngle, 0, 0, 1);
-	drawCurve(70, 300);
+
+    
+    
+    //quick hack to see the letter better
+    glScalef(1, 0.5, 1);
+    
+    drawCurve(0, 270);
+    
+    glTranslatef(0,-1.2, 0);
+    glRotatef(180, 0, 1, 0);
+    
+    drawCurve(90, 360);
+    
+    
 	glFlush();
+    glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int x, int y) {
@@ -131,7 +145,7 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(600, 400);
 	glutInitWindowPosition(100, 100);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_DEPTH | GLUT_RGBA);
-	glutCreateWindow("Basic 3D Curve: A C");
+	glutCreateWindow("S");
 	glEnable(GL_DEPTH_TEST);
     
 	glutDisplayFunc( display );
