@@ -7,8 +7,15 @@
 //
 
 
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#ifdef TARGET_OS_MAC
 #include <GLUT/glut.h>
 #include <OpenGL/OpenGL.h>
+#endif
+#elif defined _WIN32 || defined _WIN64
+#include <gl\glut.h>
+#endif
 
 #include <iostream>
 
@@ -95,7 +102,6 @@ void drawCurve(float startAngle, float stopAngle) {
 }
 
 void display() {
-	//glClearColor(1,1,1,1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glRotatef(xViewAngle, 1, 0, 0);
@@ -105,6 +111,7 @@ void display() {
     
     
     //quick hack to see the letter better
+    //todo remove + add better way
     glScalef(1, 0.5, 1);
     
     drawCurve(0, 270);
