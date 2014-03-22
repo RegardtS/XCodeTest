@@ -149,7 +149,7 @@ void keyboard(unsigned char key, int x, int y) {
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-	glutInitWindowSize(600, 400);
+	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(100, 100);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_DEPTH | GLUT_RGBA);
 	glutCreateWindow("S");
