@@ -11,6 +11,8 @@
 		CE6C035918DDDE7A0024D20E /* TestGitProject.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE6C035818DDDE7A0024D20E /* TestGitProject.1 */; };
 		CE6C036018DDE4090024D20E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C035F18DDE4090024D20E /* OpenGL.framework */; };
 		CE6C036218DDE40E0024D20E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C036118DDE40E0024D20E /* GLUT.framework */; };
+		CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */; };
+		CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,10 @@
 		CE6C035818DDDE7A0024D20E /* TestGitProject.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestGitProject.1; sourceTree = "<group>"; };
 		CE6C035F18DDE4090024D20E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		CE6C036118DDE40E0024D20E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3f.cpp; sourceTree = "<group>"; };
+		CEAF6C7318E9E7C0001755F6 /* Vector3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3f.h; sourceTree = "<group>"; };
+		CEAF6C7418E9E7C0001755F6 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
+		CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,10 @@
 		CE6C035518DDDE7A0024D20E /* TestGitProject */ = {
 			isa = PBXGroup;
 			children = (
+				CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */,
+				CEAF6C7318E9E7C0001755F6 /* Vector3f.h */,
+				CEAF6C7418E9E7C0001755F6 /* Mouse.h */,
+				CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */,
 				CE6C035618DDDE7A0024D20E /* main.cpp */,
 				CE6C035818DDDE7A0024D20E /* TestGitProject.1 */,
 			);
@@ -125,7 +135,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */,
 				CE6C035718DDDE7A0024D20E /* main.cpp in Sources */,
+				CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +247,7 @@
 				CE6C035E18DDDE7A0024D20E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
