@@ -13,6 +13,8 @@
 		CE6C036218DDE40E0024D20E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C036118DDE40E0024D20E /* GLUT.framework */; };
 		CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */; };
 		CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */; };
+		CEAF6C7D18EA3A5A001755F6 /* Letter_S.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */; };
+		CEAF6C8018EA3BF3001755F6 /* Curve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7E18EA3BF3001755F6 /* Curve.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +40,10 @@
 		CEAF6C7318E9E7C0001755F6 /* Vector3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3f.h; sourceTree = "<group>"; };
 		CEAF6C7418E9E7C0001755F6 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
 		CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
+		CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_S.cpp; sourceTree = "<group>"; };
+		CEAF6C7C18EA3A5A001755F6 /* Letter_S.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_S.h; sourceTree = "<group>"; };
+		CEAF6C7E18EA3BF3001755F6 /* Curve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Curve.cpp; sourceTree = "<group>"; };
+		CEAF6C7F18EA3BF3001755F6 /* Curve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Curve.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,10 @@
 				CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */,
 				CE6C035618DDDE7A0024D20E /* main.cpp */,
 				CE6C035818DDDE7A0024D20E /* TestGitProject.1 */,
+				CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */,
+				CEAF6C7C18EA3A5A001755F6 /* Letter_S.h */,
+				CEAF6C7E18EA3BF3001755F6 /* Curve.cpp */,
+				CEAF6C7F18EA3BF3001755F6 /* Curve.h */,
 			);
 			path = TestGitProject;
 			sourceTree = "<group>";
@@ -138,6 +148,8 @@
 				CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */,
 				CE6C035718DDDE7A0024D20E /* main.cpp in Sources */,
 				CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */,
+				CEAF6C8018EA3BF3001755F6 /* Curve.cpp in Sources */,
+				CEAF6C7D18EA3A5A001755F6 /* Letter_S.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,14 +229,18 @@
 		CE6C035D18DDDE7A0024D20E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
 		};
 		CE6C035E18DDDE7A0024D20E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
 		};
