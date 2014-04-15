@@ -26,6 +26,8 @@
 #import "Vector3f.h"
 
 #include "Letter_S.h"
+#include "Letter_R.h"
+#include "Letter_T.h"
 #include "Curve.h"
 
 
@@ -265,87 +267,28 @@ void displayText( float x, float y, int r, int g, int b, const char *string ) {
 
 void drawTSR(){
     
-    
-    
-    Letter_S::drawS();
+
+        glColor3f(1, 64/255.0, 64/255.0);
     
     
     //S
+    Letter_S::drawS();
+    //R
+    Letter_R::drawR();
+    //T
+    Letter_T::drawT();
     
     
+
    
     
     
-    //hack
-    //todo big fix
-    glRotatef(180, 0, 1, 0);
-    glTranslatef(0, -1.2, 0);
     
-    
-    
-    //R
-    glPushMatrix();
-    glTranslatef(-1.5, 0.5, 0);
-    glScalef(0.2, 2.5,1);
-    glBegin(GL_POLYGON);
-    glColor3f(1, 0, 0);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(-1.9, 1, 0);
-    glRotatef(-45, 0, 0, 1);
-    Curve::drawCurve(90, 360);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(-2, -0.1, 0);
-    glRotatef(-40, 0, 0, 1);
-    glScalef(0.2, 1.5,1);
-    glBegin(GL_POLYGON);
-    glColor3f(0, 1, 0);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
-    
-    
-    
-    //T
-    
-    glPushMatrix();
-    glTranslatef(2, 0.5, 0);
-    glScalef(0.2, 2.5,1);
-    
-    
-    glBegin(GL_POLYGON);
-    glColor3f(1, 0, 0);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(2, 1.7, 0);
-    glScalef(2, 0.2, 1);
-    glRotatef(90, 1, 0, 0);
-    
-    glBegin(GL_POLYGON);
-    glColor3f(1, 1, 0);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
 }
 
 
 void display(){
-    
-    
-    
     preProcessEvents();
-    
-    
-    
-    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     

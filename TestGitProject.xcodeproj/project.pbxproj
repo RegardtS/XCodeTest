@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE16BAA918F441CE0040505E /* Letter_R.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE16BAA718F441CE0040505E /* Letter_R.cpp */; };
 		CE6C035718DDDE7A0024D20E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE6C035618DDDE7A0024D20E /* main.cpp */; };
 		CE6C035918DDDE7A0024D20E /* TestGitProject.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE6C035818DDDE7A0024D20E /* TestGitProject.1 */; };
 		CE6C036018DDE4090024D20E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C035F18DDE4090024D20E /* OpenGL.framework */; };
 		CE6C036218DDE40E0024D20E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C036118DDE40E0024D20E /* GLUT.framework */; };
+		CEA2B20818FD433E0046F40A /* Letter_T.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEA2B20618FD433E0046F40A /* Letter_T.cpp */; };
 		CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */; };
 		CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */; };
 		CEAF6C7D18EA3A5A001755F6 /* Letter_S.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */; };
@@ -31,11 +33,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE16BAA718F441CE0040505E /* Letter_R.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_R.cpp; sourceTree = "<group>"; };
+		CE16BAA818F441CE0040505E /* Letter_R.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_R.h; sourceTree = "<group>"; };
 		CE6C035318DDDE7A0024D20E /* TestGitProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGitProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6C035618DDDE7A0024D20E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CE6C035818DDDE7A0024D20E /* TestGitProject.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestGitProject.1; sourceTree = "<group>"; };
 		CE6C035F18DDE4090024D20E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		CE6C036118DDE40E0024D20E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		CEA2B20618FD433E0046F40A /* Letter_T.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_T.cpp; sourceTree = "<group>"; };
+		CEA2B20718FD433E0046F40A /* Letter_T.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_T.h; sourceTree = "<group>"; };
 		CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3f.cpp; sourceTree = "<group>"; };
 		CEAF6C7318E9E7C0001755F6 /* Vector3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3f.h; sourceTree = "<group>"; };
 		CEAF6C7418E9E7C0001755F6 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
@@ -59,6 +65,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE16BAA618F4419D0040505E /* Regardt Letters */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */,
+				CEAF6C7C18EA3A5A001755F6 /* Letter_S.h */,
+				CE16BAA718F441CE0040505E /* Letter_R.cpp */,
+				CE16BAA818F441CE0040505E /* Letter_R.h */,
+				CEA2B20618FD433E0046F40A /* Letter_T.cpp */,
+				CEA2B20718FD433E0046F40A /* Letter_T.h */,
+			);
+			name = "Regardt Letters";
+			sourceTree = "<group>";
+		};
 		CE6C034A18DDDE7A0024D20E = {
 			isa = PBXGroup;
 			children = (
@@ -80,14 +99,13 @@
 		CE6C035518DDDE7A0024D20E /* TestGitProject */ = {
 			isa = PBXGroup;
 			children = (
+				CE16BAA618F4419D0040505E /* Regardt Letters */,
 				CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */,
 				CEAF6C7318E9E7C0001755F6 /* Vector3f.h */,
 				CEAF6C7418E9E7C0001755F6 /* Mouse.h */,
 				CEAF6C7518E9E7C0001755F6 /* Mouse.cpp */,
 				CE6C035618DDDE7A0024D20E /* main.cpp */,
 				CE6C035818DDDE7A0024D20E /* TestGitProject.1 */,
-				CEAF6C7B18EA3A5A001755F6 /* Letter_S.cpp */,
-				CEAF6C7C18EA3A5A001755F6 /* Letter_S.h */,
 				CEAF6C7E18EA3BF3001755F6 /* Curve.cpp */,
 				CEAF6C7F18EA3BF3001755F6 /* Curve.h */,
 			);
@@ -149,7 +167,9 @@
 				CE6C035718DDDE7A0024D20E /* main.cpp in Sources */,
 				CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */,
 				CEAF6C8018EA3BF3001755F6 /* Curve.cpp in Sources */,
+				CE16BAA918F441CE0040505E /* Letter_R.cpp in Sources */,
 				CEAF6C7D18EA3A5A001755F6 /* Letter_S.cpp in Sources */,
+				CEA2B20818FD433E0046F40A /* Letter_T.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

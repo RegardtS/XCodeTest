@@ -9,7 +9,6 @@
 #ifndef __TestGitProject__Letter_S__
 #define __TestGitProject__Letter_S__
 
-#include <iostream>
 
 #endif /* defined(__TestGitProject__Letter_S__) */
 

@@ -14,10 +14,8 @@
 
 #include "Curve.h"
 
-#include <iostream>
 
 void Letter_S::drawS(){
-    std::cout << "tester";
     glPushMatrix();
     Curve::drawCurve(0, 270);
     glTranslatef(0,-1.2, 0);
