@@ -90,8 +90,10 @@ void reshape(int w, int h){
 }
 
 void drawAxes(){
-    glColor3f(128/255.0, 128/255.0, 128/255.0); //nice gray color
+//    glColor3f(128/255.0, 128/255.0, 128/255.0); //nice gray color
+    
     //x
+    glColor3f(1, 0, 0);
     glBegin(GL_LINES);
     glVertex3f(-20, 0, 0);
     glVertex3f(20, 0, 0);
@@ -99,6 +101,7 @@ void drawAxes(){
     
     
     //y
+    glColor3f(0, 1, 0);
     glBegin(GL_LINES);
     glVertex3f(0, -20, 0);
     glVertex3f(0, 20, 0);
@@ -106,6 +109,7 @@ void drawAxes(){
     
     
     //z
+    glColor3f(0, 0, 1);
     glBegin(GL_LINES);
     glVertex3f(0, 0, -20);
     glVertex3f(0, 0, 20);
@@ -265,27 +269,6 @@ void displayText( float x, float y, int r, int g, int b, const char *string ) {
     }
 }
 
-void drawTSR(){
-    
-
-        glColor3f(1, 64/255.0, 64/255.0);
-    
-    
-    //S
-    Letter_S::drawS();
-    //R
-    Letter_R::drawR();
-    //T
-    Letter_T::drawT();
-    
-    
-
-   
-    
-    
-    
-}
-
 
 void display(){
     preProcessEvents();
@@ -305,21 +288,58 @@ void display(){
     
     //alt way to write text
     //    displayText(0, 0, 1, 0, 1, "Test");
+    displayText(0.5, 0, 1, 0, 0, "X");
+    displayText(-0.5, 0, 1, 0, 0, "X");
+    
+    displayText(0,0.5, 0, 1,0, "Y");
+    displayText(0,-0.5, 0,1, 0, "Y");
+    
+    
+    
+    
     
     
     
     glScalef(0.1, 0.1, 0.1);
     
+
+    glColor3f(1, 64/255.0, 64/255.0);
+    
+    
     glPushMatrix();
-    drawTSR();
+
+        Letter_R::drawR();
+        glRotatef(180, 0, 1, 0);
+        Letter_R::drawR();
     
-    //    glPushMatrix();
-    //    glTranslatef(0, -2, 0);
-    //    drawTSR();
-    //    glPopMatrix();
-    //
-    //    glPopMatrix();
+    glPopMatrix();
+
+    glTranslatef(-1, 1.5, 0);
+    glRotatef(45, 0, 0, 1);
+    glScalef(0.5, 0.5, 0);
     
+    Letter_S::drawS();
+
+    
+
+    
+    
+    
+    
+    
+    
+    /*
+    //S
+    Letter_S::drawS();
+    
+    //R
+    Letter_R::drawR();
+    
+    //T
+    Letter_T::drawT();
+    */
+
+
     
     
     

@@ -14,27 +14,20 @@
 
 
 void Letter_T::drawT(){
-    glTranslatef(-2, -0.5, 0);
-    
     glPushMatrix();
-    
-    
-    glPushMatrix();
-    glTranslatef(2, 0.5, 0);
-    glScalef(0.2, 2.5,1);
-    glBegin(GL_POLYGON);
-    glutSolidCube(1);
-    glEnd();
+        glPushMatrix();
+            glScalef(0.2, 2.5,1);
+            glBegin(GL_POLYGON);
+                glutSolidCube(1);
+            glEnd();
+        glPopMatrix();
+        glPushMatrix();
+            glTranslatef(0, 1.2, 0);
+            glScalef(2, 0.2, 1);
+            glRotatef(90, 1, 0, 0);
+            glBegin(GL_POLYGON);
+                glutSolidCube(1);
+            glEnd();
+        glPopMatrix();
     glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(2, 1.7, 0);
-    glScalef(2, 0.2, 1);
-    glRotatef(90, 1, 0, 0);
-    glBegin(GL_POLYGON);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
-    glPopMatrix();
-    
 }

@@ -16,35 +16,34 @@
 
 
 void Letter_R::drawR(){
+    
+//    glTranslatef(2, -0.5, 0);
+    
+    glPushMatrix();
     glRotatef(180, 0, 1, 0);
-    glTranslatef(2, -0.5, 0);
-    
-    glPushMatrix();
     
     
+        glPushMatrix();
+            glScalef(0.2, 2.5,1);
+            glBegin(GL_POLYGON);
+                glutSolidCube(1);
+            glEnd();
+        glPopMatrix();
     
-    glPushMatrix();
-    glTranslatef(-1.5, 0.5, 0);
-    glScalef(0.2, 2.5,1);
-    glBegin(GL_POLYGON);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(-0.4, 0.5, 0);
+            glRotatef(-45, 0, 0, 1);
+            Curve::drawCurve(90, 360);
+        glPopMatrix();
     
-    glPushMatrix();
-    glTranslatef(-1.9, 1, 0);
-    glRotatef(-45, 0, 0, 1);
-    Curve::drawCurve(90, 360);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(-2, -0.1, 0);
-    glRotatef(-40, 0, 0, 1);
-    glScalef(0.2, 1.5,1);
-    glBegin(GL_POLYGON);
-    glutSolidCube(1);
-    glEnd();
-    glPopMatrix();
+        glPushMatrix();
+            glTranslatef(-0.5, -0.6, 0);
+            glRotatef(-40, 0, 0, 1);
+            glScalef(0.2, 1.5,1);
+            glBegin(GL_POLYGON);
+                glutSolidCube(1);
+            glEnd();
+        glPopMatrix();
     
     glPopMatrix();
 
