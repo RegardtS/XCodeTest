@@ -90,13 +90,16 @@ void drawI(){
 
 void Letter_B::drawB(){
     glPushMatrix();
-        glScalef(1.2,1.2,1.0);
+//        glTranslatef(0, 0.1, 0);
+        glScalef(1.2,1.3,5.0);
+
         drawI();
 	glPopMatrix();
 	
 	glPushMatrix();
         glTranslatef(-0.30,0.47, 0.0);
         glRotatef(180,0,1,0);
+//    glScalef(1, 1, 3);
 
         Curve::drawCurve(90, 270);
         glTranslatef(0, -1, 0);
