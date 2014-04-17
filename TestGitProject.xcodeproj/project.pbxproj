@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1001F418FFD7A400780BF0 /* Letter_M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE1001F218FFD7A400780BF0 /* Letter_M.cpp */; };
+		CE1001F718FFD88100780BF0 /* Letter_F.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE1001F518FFD88100780BF0 /* Letter_F.cpp */; };
+		CE1001FA18FFD98200780BF0 /* Letter_B.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE1001F818FFD98200780BF0 /* Letter_B.cpp */; };
 		CE16BAA918F441CE0040505E /* Letter_R.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE16BAA718F441CE0040505E /* Letter_R.cpp */; };
 		CE6C035718DDDE7A0024D20E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE6C035618DDDE7A0024D20E /* main.cpp */; };
 		CE6C035918DDDE7A0024D20E /* TestGitProject.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE6C035818DDDE7A0024D20E /* TestGitProject.1 */; };
@@ -33,6 +36,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE1001F218FFD7A400780BF0 /* Letter_M.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_M.cpp; sourceTree = "<group>"; };
+		CE1001F318FFD7A400780BF0 /* Letter_M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_M.h; sourceTree = "<group>"; };
+		CE1001F518FFD88100780BF0 /* Letter_F.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_F.cpp; sourceTree = "<group>"; };
+		CE1001F618FFD88100780BF0 /* Letter_F.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_F.h; sourceTree = "<group>"; };
+		CE1001F818FFD98200780BF0 /* Letter_B.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_B.cpp; sourceTree = "<group>"; };
+		CE1001F918FFD98200780BF0 /* Letter_B.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_B.h; sourceTree = "<group>"; };
 		CE16BAA718F441CE0040505E /* Letter_R.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Letter_R.cpp; sourceTree = "<group>"; };
 		CE16BAA818F441CE0040505E /* Letter_R.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Letter_R.h; sourceTree = "<group>"; };
 		CE6C035318DDDE7A0024D20E /* TestGitProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGitProject; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +74,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE1001F118FFD78500780BF0 /* Mark Letters */ = {
+			isa = PBXGroup;
+			children = (
+				CE1001F218FFD7A400780BF0 /* Letter_M.cpp */,
+				CE1001F318FFD7A400780BF0 /* Letter_M.h */,
+				CE1001F518FFD88100780BF0 /* Letter_F.cpp */,
+				CE1001F618FFD88100780BF0 /* Letter_F.h */,
+				CE1001F818FFD98200780BF0 /* Letter_B.cpp */,
+				CE1001F918FFD98200780BF0 /* Letter_B.h */,
+			);
+			name = "Mark Letters";
+			sourceTree = "<group>";
+		};
 		CE16BAA618F4419D0040505E /* Regardt Letters */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +121,7 @@
 		CE6C035518DDDE7A0024D20E /* TestGitProject */ = {
 			isa = PBXGroup;
 			children = (
+				CE1001F118FFD78500780BF0 /* Mark Letters */,
 				CE16BAA618F4419D0040505E /* Regardt Letters */,
 				CEAF6C7218E9E7C0001755F6 /* Vector3f.cpp */,
 				CEAF6C7318E9E7C0001755F6 /* Vector3f.h */,
@@ -165,10 +188,13 @@
 			files = (
 				CEAF6C7718E9E7C0001755F6 /* Mouse.cpp in Sources */,
 				CE6C035718DDDE7A0024D20E /* main.cpp in Sources */,
+				CE1001F418FFD7A400780BF0 /* Letter_M.cpp in Sources */,
 				CEAF6C7618E9E7C0001755F6 /* Vector3f.cpp in Sources */,
+				CE1001F718FFD88100780BF0 /* Letter_F.cpp in Sources */,
 				CEAF6C8018EA3BF3001755F6 /* Curve.cpp in Sources */,
 				CE16BAA918F441CE0040505E /* Letter_R.cpp in Sources */,
 				CEAF6C7D18EA3A5A001755F6 /* Letter_S.cpp in Sources */,
+				CE1001FA18FFD98200780BF0 /* Letter_B.cpp in Sources */,
 				CEA2B20818FD433E0046F40A /* Letter_T.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

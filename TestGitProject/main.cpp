@@ -28,6 +28,9 @@
 #include "Letter_S.h"
 #include "Letter_R.h"
 #include "Letter_T.h"
+#include "Letter_M.h"
+#include "Letter_F.h"
+#include "Letter_B.h"
 #include "Curve.h"
 
 
@@ -287,7 +290,6 @@ void display(){
     drawAxes();
     
     //alt way to write text
-    //    displayText(0, 0, 1, 0, 1, "Test");
     displayText(0.5, 0, 1, 0, 0, "X");
     displayText(-0.5, 0, 1, 0, 0, "X");
     
@@ -305,22 +307,26 @@ void display(){
 
     glColor3f(1, 64/255.0, 64/255.0);
     
+    Letter_B::drawB();
     
-    glPushMatrix();
-
-        Letter_R::drawR();
-        glRotatef(180, 0, 1, 0);
-        Letter_R::drawR();
-    
-    glPopMatrix();
-
-    glTranslatef(-1, 1.5, 0);
-    glRotatef(45, 0, 0, 1);
-    glScalef(0.5, 0.5, 0);
-    
-    Letter_S::drawS();
 
     
+    
+//    glPushMatrix();
+//
+//        Letter_R::drawR();
+//        glRotatef(180, 0, 1, 0);
+//        Letter_R::drawR();
+//    
+//    glPopMatrix();
+//
+//    glTranslatef(-1, 1.5, 0);
+//    glRotatef(45, 0, 0, 1);
+//    glScalef(0.5, 0.5, 1);
+//    
+//    Letter_S::drawS();
+//
+//    
 
     
     
