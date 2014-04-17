@@ -276,6 +276,7 @@ void displayText( float x, float y, int r, int g, int b, const char *string ) {
 void display(){
     preProcessEvents();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(99/255.0, 173/255.0, 208/255.0, 1);
     glLoadIdentity();
     
     
@@ -305,11 +306,41 @@ void display(){
     glScalef(0.1, 0.1, 0.1);
     
 
-    glColor3f(1, 64/255.0, 64/255.0);
+    glColor3f(170/255.0, 170/255.0, 170/255.0);
     
-    Letter_B::drawB();
+    glRotatef(90, 1, 0, 0);
+    glRotatef(90, 0, 1, 0);
     
+    glPushMatrix();
+    for (int y = 0; y < 2; y++) {
 
+        if (y > 0) {
+            glTranslatef(-0.5, 0, 0.5);
+            glRotatef(90, 0, 1, 0);
+        }
+        
+        glPushMatrix();
+        for (int i = 0; i < 5; i++) {
+            Letter_M::drawM();
+            glTranslatef(0, 1, 0);
+        }
+        glPopMatrix();
+    
+        glPushMatrix();
+            glTranslatef(0, 0, 1);
+            for (int i = 0; i < 5; i++) {
+                Letter_M::drawM();
+                glTranslatef(0, 1, 0);
+            }
+        
+        glPopMatrix();
+        
+    }
+    glPopMatrix();
+    
+   
+    
+    
     
     
 //    glPushMatrix();

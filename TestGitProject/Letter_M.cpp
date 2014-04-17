@@ -16,39 +16,36 @@
 void Letter_M::drawM(){
     
     glPushMatrix();
-	glScalef(0.2,1,0.3);
-	glTranslatef(-2,0,0);
-	glBegin(GL_POLYGON);
-	glutSolidCube(1);
-	glEnd();
-	
-	glTranslatef(4,0,0);
-	glBegin(GL_POLYGON);
-	glutSolidCube(1);
-	glEnd();
-    
+        glScalef(0.2,1,0.3);
+        glTranslatef(-2,0,0);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
+        glTranslatef(4,0,0);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
 	glPopMatrix();
     
 	glPushMatrix();
-	
-	glTranslatef(-0.17,0.17,0);
-	glRotatef(45,0,0,1);
-	glScalef(0.2,0.7,0.3);
+        glTranslatef(-0.17,0.17,0);
+        glRotatef(45,0,0,1);
+        glScalef(0.2,0.7,0.3);
     
-	glBegin(GL_POLYGON);
-	glutSolidCube(1);
-	glEnd();
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
     
-	glPopMatrix();
+        glPopMatrix();
     
-	glPushMatrix();
+    glPushMatrix();
     
-	glTranslatef(0.17,0.17,0);
-	glRotatef(-45,0,0,1);
-	glScalef(0.2,0.7,0.3);
+        glTranslatef(0.17,0.17,0);
+        glRotatef(-45,0,0,1);
+        glScalef(0.2,0.7,0.3);
     
-	glBegin(GL_POLYGON);
-	glutSolidCube(1);
-	glEnd();
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
 	glPopMatrix();
 }
