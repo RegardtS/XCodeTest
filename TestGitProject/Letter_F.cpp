@@ -16,6 +16,10 @@
 void Letter_F::drawF(){
     
     glPushMatrix();
+    
+    glScalef(1, 1, 0.5);
+    
+    glPushMatrix();
 	glScalef(0.2,1,1);
 	glTranslatef(-2,0,0);
 	glBegin(GL_POLYGON);
@@ -27,7 +31,6 @@ void Letter_F::drawF(){
 	glTranslatef(-0.2,0.4,0);
 	glScalef(0.5,0.2,1);
 	glRotatef(90,0,0,1);
-	glColor3f(80/255.0,80/255.0,80/255.0);
 	glBegin(GL_POLYGON);
 	glutSolidCube(1);
 	glEnd();
@@ -38,10 +41,13 @@ void Letter_F::drawF(){
 	glTranslatef(-0.2,0,0);
 	glScalef(0.5,0.2,1);
 	glRotatef(90,0,0,1);
-	glColor3f(80/255.0,80/255.0,80/255.0);
 	glBegin(GL_POLYGON);
 	glutSolidCube(1);
 	glEnd();
 	glPopMatrix();
+    
+    glPopMatrix();
+    
+
 
 }

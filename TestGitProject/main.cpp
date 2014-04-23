@@ -76,20 +76,12 @@ void reshape(int w, int h){
     if (h == 0){
         h = 1;
     }
-    
     float ratio = (float) w / h;
-    
     glMatrixMode(GL_PROJECTION);
-    
     glLoadIdentity();
-    
     glViewport(0,0, w, h);
-    
     gluPerspective(45,ratio,0.01,1000);
-    
     glMatrixMode(GL_MODELVIEW);
-    
-    
 }
 
 void drawAxes(){
@@ -121,69 +113,6 @@ void drawAxes(){
     
 }
 
-void drawCube(){
-    glBegin(GL_POLYGON);
-    
-    
-    glColor3f( 1.0, 0.0, 0.0 );     glVertex3f(  0.5, -0.5, -0.5 );      // P1 is red
-    glColor3f( 0.0, 1.0, 0.0 );     glVertex3f(  0.5,  0.5, -0.5 );      // P2 is green
-    glColor3f( 0.0, 0.0, 1.0 );     glVertex3f( -0.5,  0.5, -0.5 );      // P3 is blue
-    glColor3f( 1.0, 0.0, 1.0 );     glVertex3f( -0.5, -0.5, -0.5 );      // P4 is purple
-    
-    glEnd();
-}
-
-void drawO(){
-    
-    
-    // float r1 = 0.5;
-    // float r2 = 0.4;
-    // float PI = 3.142;
-    
-    
-//    glBegin(GL_QUAD_STRIP);
-//    for (float theta = 0; theta <= 360; theta++) {
-//        float thetaRad = theta * PI / 180;
-//        glColor3f(0, 0, 1);
-//        glVertex3f(r1 * cos(thetaRad), r1 * sin(thetaRad), 0.5);
-//        glVertex3f(r1 * cos(thetaRad), r1 * sin(thetaRad), -0.5);
-//    }
-//    glEnd();
-//    
-//    glBegin(GL_QUAD_STRIP);
-//    for (float theta = 0; theta <= 360; theta++) {
-//        float thetaRad = theta * PI / 180;
-//        glColor3f(1, 0, 0);
-//        glVertex3f(r2 * cos(thetaRad), r2 * sin(thetaRad), 0.5);
-//        glVertex3f(r2 * cos(thetaRad), r2 * sin(thetaRad), -0.5);
-//    }
-//    glEnd();
-//    
-//    
-//    
-//    glBegin(GL_QUAD_STRIP);
-//    for (float theta = 0; theta <= 360; theta++) {
-//        float thetaRad = theta * PI / 180;
-//        glColor3f(0, 1, 0);
-//        glVertex3f(r2 * cos(thetaRad), r2 * sin(thetaRad), 0.5);
-//        glVertex3f(r1 * cos(thetaRad), r1 * sin(thetaRad), 0.5);
-//    }
-//    glEnd();
-//    
-//    glBegin(GL_QUAD_STRIP);
-//    for (float theta = 0; theta <= 360; theta++) {
-//        float thetaRad = theta * PI / 180;
-//        glColor3f(1, 1, 0);
-//        glVertex3f(r1 * cos(thetaRad), r1 * sin(thetaRad), -0.5);
-//        glVertex3f(r2 * cos(thetaRad), r2 * sin(thetaRad), -0.5);
-//    }
-//    glEnd();
-//    
-//    
-    
-    
-    
-}
 
 
 
@@ -301,15 +230,32 @@ void display(){
     
     
     
-    
-    
     glScalef(0.1, 0.1, 0.1);
+    
+    /*
+    
+    Letter_B::drawB();glTranslatef(2, 0, 0);
+    Letter_F::drawF();glTranslatef(2, 0, 0);
+    Letter_M::drawM();glTranslatef(2, 0, 0);
+    Letter_R::drawR();glTranslatef(0, 0, 2);
+    Letter_S::drawS();glTranslatef(0, 0, 2);
+    Letter_T::drawT();
+    
+    */
+    
+ 
     
 
     glColor3f(170/255.0, 170/255.0, 170/255.0);
     
+    glPushMatrix();
+    
+    glTranslatef(-0.5, 0, -2);
+    
     glRotatef(90, 1, 0, 0);
     glRotatef(90, 0, 1, 0);
+    
+    
     
     glPushMatrix();
     for (int y = 0; y < 2; y++) {
@@ -338,9 +284,27 @@ void display(){
     }
     glPopMatrix();
     
-   
+    glPopMatrix();
+    
+    glColor3f(1, 0,0);
+    
+ 
+    
+    glPushMatrix();
+    glTranslatef(1, 0, 0);
+    Letter_F::drawF();
+    glPopMatrix();
     
     
+    glPushMatrix();
+    glRotatef(180, 0, 1, 0);
+    
+    glTranslatef(1, 0, 0);
+    Letter_F::drawF();
+    glPopMatrix();
+    
+    
+
     
     
 //    glPushMatrix();
