@@ -123,9 +123,6 @@ void drawAxes(){
 
 void keyboardDown(unsigned char key, int x,int y){
     KEYS[key] = true;
-    
-    
-    // std::cout << key;
 }
 
 void keyboardUp(unsigned char key, int x,int y){
@@ -242,7 +239,26 @@ void display(){
     Letter_T::drawT();
     
     */
+    glPushMatrix();
+    glRotatef(45, 1, 0, 0);
+    Letter_T::drawT();
+    glPopMatrix();
     
+    glPushMatrix();
+    
+    glTranslatef(0, 0, -1);
+        glRotatef(-45, 1, 0, 0);
+    Letter_T::drawT();
+    
+    glPopMatrix();
+    Letter_S::drawS();
+    
+//    Letter_S::drawS();
+
+    
+    
+    
+    /*
  
     
 
@@ -288,7 +304,7 @@ void display(){
     
     glColor3f(1, 0,0);
     
- 
+    glTranslatef(0, 0, 1.5);
     
     glPushMatrix();
     glTranslatef(1, 0, 0);
@@ -304,8 +320,8 @@ void display(){
     glPopMatrix();
     
     
+*/
 
-    
     
 //    glPushMatrix();
 //
@@ -373,7 +389,10 @@ void display(){
 
 
 
-
+static void Timer(int value){
+    glutPostRedisplay();
+    glutTimerFunc(100, Timer, 0);
+}
 
 int main(int argc, char ** argv){
     
@@ -402,7 +421,7 @@ int main(int argc, char ** argv){
     glutMotionFunc(Mouse::move);
     glutPassiveMotionFunc(Mouse::move);
     
-    
+    Timer(0);
     
     
     glutMainLoop();
