@@ -239,30 +239,12 @@ void display(){
     Letter_T::drawT();
     
     */
-    glPushMatrix();
-    glRotatef(45, 1, 0, 0);
-    Letter_T::drawT();
-    glPopMatrix();
-    
-    glPushMatrix();
-    
-    glTranslatef(0, 0, -1);
-        glRotatef(-45, 1, 0, 0);
-    Letter_T::drawT();
-    
-    glPopMatrix();
-    Letter_S::drawS();
-    
-//    Letter_S::drawS();
 
-    
-    
-    
-    /*
  
     
 
-    glColor3f(170/255.0, 170/255.0, 170/255.0);
+//    glColor3f(170/255.0, 170/255.0, 170/255.0);
+//
     
     glPushMatrix();
     
@@ -272,114 +254,79 @@ void display(){
     glRotatef(90, 0, 1, 0);
     
     
-    
+    //DRAWS THE BODY WITH THE LETTER M
     glPushMatrix();
-    for (int y = 0; y < 2; y++) {
-
-        if (y > 0) {
+    for (int y = 0; y != 5; y++) {
+        Letter_M::drawM();
+        for (int i = 0; i != 3; i++) {
             glTranslatef(-0.5, 0, 0.5);
             glRotatef(90, 0, 1, 0);
-        }
-        
-        glPushMatrix();
-        for (int i = 0; i < 5; i++) {
             Letter_M::drawM();
-            glTranslatef(0, 1, 0);
         }
-        glPopMatrix();
-    
-        glPushMatrix();
-            glTranslatef(0, 0, 1);
-            for (int i = 0; i < 5; i++) {
-                Letter_M::drawM();
-                glTranslatef(0, 1, 0);
-            }
-        
-        glPopMatrix();
-        
+        glTranslatef(0, 1, 0);
     }
     glPopMatrix();
     
-    glPopMatrix();
     
-    glColor3f(1, 0,0);
     
-    glTranslatef(0, 0, 1.5);
-    
+    //DRAWS THE EYES WITH THE LETTER R
     glPushMatrix();
-    glTranslatef(1, 0, 0);
-    Letter_F::drawF();
+        glColor3f(0, 0, 1);
+        glTranslatef(0, -0.5, 0.1);
+        glRotatef(270, 0, 0, 1);
+        glScalef(0.5, 0.5, 0.5);
+        Letter_R::drawR();
+        glTranslatef(0, 0, 1.5);
+        Letter_R::drawR();
     glPopMatrix();
     
     
+    //DRAWS THE TOP FIN WITH THE LETTER B
     glPushMatrix();
-    glRotatef(180, 0, 1, 0);
-    
-    glTranslatef(1, 0, 0);
-    Letter_F::drawF();
+        glTranslatef(1, 2, 0.5);
+        glRotatef(90, 0, 0, 1);
+        glScalef(0.5, 0.5, 0.5);
+        Letter_B::drawB();
     glPopMatrix();
     
     
-*/
+    //DRAWS THE BOTTOM FINS WITH THE LETTER S
+    glPushMatrix();
+            glTranslatef(-1, 2, 1.5);
+                glScalef(0.5, 0.5, 0.5);
+                glRotatef(45, 0, 0, 1);
+                glRotatef(45, 1, 0, 0);
+                Letter_S::drawS();
+    
+    
+    
+            glTranslatef(0, 0, -2);
+        glRotatef(90, 1, 0, 0);
+        glColor3f(1, 0, 0);
+//        Letter_S::drawS();
+    
+    glPopMatrix();
+    
+    
+    
+     //DRAWS THE BACK FIN WITH THE LETTER F
+    glPushMatrix();
+        glTranslatef(1, 2, 0.5);
+        glRotatef(90, 0, 0, 1);
+//        glScalef(0.5, 0.5, 0.5);
+        Letter_F::drawF();
+    glPopMatrix();
+    
+    
+    
+    
+    
+    
+    
+    glPopMatrix();
+    
+    
 
-    
-//    glPushMatrix();
-//
-//        Letter_R::drawR();
-//        glRotatef(180, 0, 1, 0);
-//        Letter_R::drawR();
-//    
-//    glPopMatrix();
-//
-//    glTranslatef(-1, 1.5, 0);
-//    glRotatef(45, 0, 0, 1);
-//    glScalef(0.5, 0.5, 1);
-//    
-//    Letter_S::drawS();
-//
-//    
-
-    
-    
-    
-    
-    
-    
-    /*
-    //S
-    Letter_S::drawS();
-    
-    //R
-    Letter_R::drawR();
-    
-    //T
-    Letter_T::drawT();
-    */
-
-
-    
-    
-    
-    //instance first cubes
-    //        glPushMatrix();
-    //            //glScalef(0.5, 0.5, 0.5);
-    //            drawCube();
-    //            //instance for articulated objects
-    //            glPushMatrix();
-    //                glTranslatef(0.5, 0.5,  0);
-    //                glTranslatef(0.5, -0.5, 0);
-    //                drawCube();
-    //            glPopMatrix();
-    //
-    //            glTranslatef(0, 0, -1);
-    //            drawCube();
-    //
-    //
-    //        glPopMatrix();
-    
-    
-    
-    
     
     glFlush();
     glutSwapBuffers();
@@ -428,6 +375,31 @@ int main(int argc, char ** argv){
     
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
