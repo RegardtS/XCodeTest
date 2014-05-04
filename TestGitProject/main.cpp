@@ -56,15 +56,18 @@ int MOUSE_DELTA_Y;
 
 
 
-float artZ = 0.0;
-
-
 Vector3f CAMERA_POSITION;
 Vector3f CAMERA_ROTATION;
 
 
 bool KEYS[256];
 
+
+bool flapFish = false;
+bool flapFirst = false;
+
+
+float rotationAngle = 0;
 
 
 
@@ -82,6 +85,16 @@ void reshape(int w, int h){
     glViewport(0,0, w, h);
     gluPerspective(45,ratio,0.01,1000);
     glMatrixMode(GL_MODELVIEW);
+}
+
+void displayText( float x, float y, int r, int g, int b, const char *string ) {
+    int j = strlen( string );
+    
+    glColor3f( r, g, b );
+    glRasterPos2f( x, y );
+    for( int i = 0; i < j; i++ ) {
+        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, string[i] );
+    }
 }
 
 void drawAxes(){
@@ -111,6 +124,13 @@ void drawAxes(){
     glEnd();
     
     
+    //alt way to write text
+    displayText(0.5, 0, 1, 0, 0, "X");
+    displayText(-0.5, 0, 1, 0, 0, "X");
+    
+    displayText(0,0.5, 0, 1,0, "Y");
+    displayText(0,-0.5, 0,1, 0, "Y");
+    
 }
 
 
@@ -123,10 +143,24 @@ void drawAxes(){
 
 void keyboardDown(unsigned char key, int x,int y){
     KEYS[key] = true;
+    
+    if (KEYS['f']) {
+        flapFish = !flapFish;
+    }
+    if (KEYS['F']) {
+        flapFirst = !flapFirst;
+        
+    }
+    
+    
+    
 }
 
 void keyboardUp(unsigned char key, int x,int y){
     KEYS[key] = false;
+    
+    
+    
 }
 
 
@@ -178,25 +212,35 @@ void preProcessEvents(){
     if (KEYS['z']){
         CAMERA_POSITION.y -= 0.01;
     }
-    if (KEYS['1']) {
-        artZ++;
-    }
-    if (KEYS['2']) {
-        artZ--;
-    }
-}
 
-
-
-void displayText( float x, float y, int r, int g, int b, const char *string ) {
-    int j = strlen( string );
     
-    glColor3f( r, g, b );
-    glRasterPos2f( x, y );
-    for( int i = 0; i < j; i++ ) {
-        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, string[i] );
-    }
+    
+    
+    
+    
 }
+
+
+
+
+
+void drawBodyPiece(){
+    glPushMatrix();
+        glRotatef(90, 1, 0, 0);
+        glRotatef(90, 0, 1, 0);
+    
+        Letter_M::drawM();
+    
+        for (int i = 0; i != 3; i++) {
+            glTranslatef(-0.5, 0, 0.5);
+            glRotatef(90, 0, 1, 0);
+            Letter_M::drawM();
+        }
+    
+    glPopMatrix();
+}
+
+
 
 
 void display(){
@@ -204,8 +248,6 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(99/255.0, 173/255.0, 208/255.0, 1);
     glLoadIdentity();
-    
-    
     
     
     glTranslatef(-CAMERA_POSITION.x, -CAMERA_POSITION.y, CAMERA_POSITION.z);
@@ -216,106 +258,58 @@ void display(){
     
     drawAxes();
     
-    //alt way to write text
-    displayText(0.5, 0, 1, 0, 0, "X");
-    displayText(-0.5, 0, 1, 0, 0, "X");
-    
-    displayText(0,0.5, 0, 1,0, "Y");
-    displayText(0,-0.5, 0,1, 0, "Y");
-    
-    
-    
-    
     
     glScalef(0.1, 0.1, 0.1);
     
-    /*
-    
-    Letter_B::drawB();glTranslatef(2, 0, 0);
-    Letter_F::drawF();glTranslatef(2, 0, 0);
-    Letter_M::drawM();glTranslatef(2, 0, 0);
-    Letter_R::drawR();glTranslatef(0, 0, 2);
-    Letter_S::drawS();glTranslatef(0, 0, 2);
-    Letter_T::drawT();
-    
-    */
-
- 
-    
-
-//    glColor3f(170/255.0, 170/255.0, 170/255.0);
-//
-    
-    glPushMatrix();
-    
-    glTranslatef(-0.5, 0, -2);
-    
-    glRotatef(90, 1, 0, 0);
-    glRotatef(90, 0, 1, 0);
     
     
-    //DRAWS THE BODY WITH THE LETTER M
-    glPushMatrix();
-    for (int y = 0; y != 5; y++) {
-        Letter_M::drawM();
-        for (int i = 0; i != 3; i++) {
-            glTranslatef(-0.5, 0, 0.5);
-            glRotatef(90, 0, 1, 0);
-            Letter_M::drawM();
-        }
-        glTranslatef(0, 1, 0);
-    }
-    glPopMatrix();
+    
     
     
     
     //DRAWS THE EYES WITH THE LETTER R
     glPushMatrix();
-        glColor3f(0, 0, 1);
-        glTranslatef(0, -0.5, 0.1);
-        glRotatef(270, 0, 0, 1);
+        glTranslatef(-0.375, 0, -0.5);
+        glRotatef(270, 0, 1, 0);
+        glRotatef(180, 0, 1, 0);
         glScalef(0.5, 0.5, 0.5);
         Letter_R::drawR();
         glTranslatef(0, 0, 1.5);
         Letter_R::drawR();
     glPopMatrix();
-    
-    
-    //DRAWS THE TOP FIN WITH THE LETTER B
-    glPushMatrix();
-        glTranslatef(1, 2, 0.5);
-        glRotatef(90, 0, 0, 1);
-        glScalef(0.5, 0.5, 0.5);
-        Letter_B::drawB();
-    glPopMatrix();
-    
-    
-    //DRAWS THE BOTTOM FINS WITH THE LETTER S
-    glPushMatrix();
-            glTranslatef(-1, 2, 1.5);
-                glScalef(0.5, 0.5, 0.5);
-                glRotatef(45, 0, 0, 1);
-                glRotatef(45, 1, 0, 0);
-                Letter_S::drawS();
+
     
     
     
-            glTranslatef(0, 0, -2);
-        glRotatef(90, 1, 0, 0);
+    glColor3f(1, 0, 0);
+    glTranslatef(-0.5, 0, 0);
+    drawBodyPiece();
+    
+    for (int i = 0; i != 4; i++) {
+        
+        if (i == 1) {
+            glPushMatrix();
+            glColor3f(0, 0, 1);
+            glTranslatef(0.5, 1.2, 0);
+            glRotatef(90, 0, 1, 0);
+            glRotatef(180, 0, 0, 1);
+            
+            glScalef(0.5, 0.5, 0.5);
+            Letter_B::drawB();
+            glPopMatrix();
+        }
+        
+        
         glColor3f(1, 0, 0);
-//        Letter_S::drawS();
-    
-    glPopMatrix();
-    
-    
-    
-     //DRAWS THE BACK FIN WITH THE LETTER F
-    glPushMatrix();
-        glTranslatef(1, 2, 0.5);
-        glRotatef(90, 0, 0, 1);
-//        glScalef(0.5, 0.5, 0.5);
-        Letter_F::drawF();
-    glPopMatrix();
+        
+        glTranslatef(0, 0, 1);
+        glRotatef(rotationAngle, 0, 1, 0);
+        drawBodyPiece();
+        
+        
+
+        
+    }
     
     
     
@@ -323,7 +317,43 @@ void display(){
     
     
     
-    glPopMatrix();
+    
+
+//    
+//    //DRAWS THE BOTTOM FINS WITH THE LETTER S
+//    glPushMatrix();
+//            glTranslatef(-1, 2, 1.5);
+//                glScalef(0.5, 0.5, 0.5);
+//                glRotatef(45, 0, 0, 1);
+//                glRotatef(45, 1, 0, 0);
+//                Letter_S::drawS();
+//    
+//    
+//    
+//            glTranslatef(0, 0, -2);
+//        glRotatef(90, 1, 0, 0);
+//        glColor3f(1, 0, 0);
+////        Letter_S::drawS();
+//    
+//    glPopMatrix();
+//    
+//    
+//    
+//     //DRAWS THE BACK FIN WITH THE LETTER F
+//    glPushMatrix();
+//        glTranslatef(1, 2, 0.5);
+//        glRotatef(90, 0, 0, 1);
+////        glScalef(0.5, 0.5, 0.5);
+//        Letter_F::drawF();
+//    glPopMatrix();
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    glPopMatrix();
     
     
 
@@ -337,13 +367,27 @@ void display(){
 
 
 static void Timer(int value){
+    
+    if (flapFish) {
+        if (flapFirst) {
+            rotationAngle++;
+            if (rotationAngle == 10) {
+                flapFirst = !flapFirst;
+            }
+        }else{
+            rotationAngle--;
+            if (rotationAngle == -10) {
+                flapFirst = !flapFirst;
+            }
+        }
+    }
+    
+    
     glutPostRedisplay();
     glutTimerFunc(100, Timer, 0);
 }
 
 int main(int argc, char ** argv){
-    
-    //std::cout << "TESTER";
     
     CAMERA_POSITION.z = -1;
     
