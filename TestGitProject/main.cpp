@@ -36,8 +36,8 @@
 
 
 
-const int WINDOW_W = 1200;
-const int WINDOW_H = 720;
+const int WINDOW_W = 1920;
+const int WINDOW_H = 1080;
 
 const float MOUSE_SENSITIVITY = 1;
 const float WALKING_SPEED = 1;
@@ -68,9 +68,7 @@ bool flapFirst = false;
 
 
 float rotationAngle = 0;
-
-
-
+float finRotation = 0;
 
 
 
@@ -149,8 +147,13 @@ void keyboardDown(unsigned char key, int x,int y){
     }
     if (KEYS['F']) {
         flapFirst = !flapFirst;
+    }
+    if (KEYS['v']) {
+        finRotation+=10;
         
     }
+    
+    
     
     
     
@@ -288,14 +291,41 @@ void display(){
     for (int i = 0; i != 4; i++) {
         
         if (i == 1) {
+            //LETTER B FIN
             glPushMatrix();
-            glColor3f(0, 0, 1);
-            glTranslatef(0.5, 1.2, 0);
-            glRotatef(90, 0, 1, 0);
-            glRotatef(180, 0, 0, 1);
+                glColor3f(0, 0, 1);
+                glTranslatef(0.5, 1.2, 0);
+                glRotatef(90, 0, 1, 0);
+                glRotatef(180, 0, 0, 1);
             
-            glScalef(0.5, 0.5, 0.5);
-            Letter_B::drawB();
+                glScalef(0.5, 0.5, 0.5);
+                Letter_B::drawB();
+            glPopMatrix();
+            
+            
+            
+            
+            
+            //LETTER S FIN
+            glPushMatrix();
+                glTranslatef(0, -1, 0);
+                glRotatef(-45, 0, 0, 1);
+            
+                glRotatef(finRotation, 1, 0, 0);
+            
+                glScalef(0.5, 0.5, 0.5);
+            
+            
+            
+                Letter_S::drawS();
+            
+            
+            
+//            glTranslatef(0, 0, -2);
+//            glRotatef(90, 1, 0, 0);
+//            glColor3f(1, 0, 0);
+            //        Letter_S::drawS();
+            
             glPopMatrix();
         }
         
@@ -306,12 +336,26 @@ void display(){
         glRotatef(rotationAngle, 0, 1, 0);
         drawBodyPiece();
         
-        
-
-        
     }
     
+    glColor3f(1, 1, 0);
     
+    glPushMatrix();
+        glTranslatef(0.5, 0.5, 1);
+        glRotatef(-90, 0, 1, 0);
+        glRotatef(-45, 0, 0, 1);
+        Letter_F::drawF();
+    glPopMatrix();
+    
+    
+    glColor3f(1, 1, 1);
+    glPushMatrix();
+        glTranslatef(0.5, -1, 0.75);
+        glRotatef(-90, 0, 1, 0);
+        glRotatef(-135, 0, 0, 1);
+        glScalef(0.5, 0.5, 0.5);
+        Letter_T::drawT();
+    glPopMatrix();
     
     
     
@@ -319,25 +363,6 @@ void display(){
     
     
 
-//    
-//    //DRAWS THE BOTTOM FINS WITH THE LETTER S
-//    glPushMatrix();
-//            glTranslatef(-1, 2, 1.5);
-//                glScalef(0.5, 0.5, 0.5);
-//                glRotatef(45, 0, 0, 1);
-//                glRotatef(45, 1, 0, 0);
-//                Letter_S::drawS();
-//    
-//    
-//    
-//            glTranslatef(0, 0, -2);
-//        glRotatef(90, 1, 0, 0);
-//        glColor3f(1, 0, 0);
-////        Letter_S::drawS();
-//    
-//    glPopMatrix();
-//    
-//    
 //    
 //     //DRAWS THE BACK FIN WITH THE LETTER F
 //    glPushMatrix();
