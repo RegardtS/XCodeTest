@@ -42,7 +42,7 @@ const int WINDOW_W = 1920;
 const int WINDOW_H = 1080;
 
 
-int x_y_display=0, y_z_display=0, x_z_display=0;
+
 
 
 //for view control
@@ -60,6 +60,10 @@ bool disco = false;
 bool displayLines = true;
 bool flapFin = false;
 bool flapFinFirst = true;
+
+bool x_y_display=false;
+bool y_z_display=false;
+bool x_z_display=false;
 
 
 float rotationAngle = 0;
@@ -81,43 +85,27 @@ void reshape(int w, int h){
     glMatrixMode(GL_MODELVIEW);
 }
 
-
-
 void drawAxes(){
-    glColor3f(128/255.0, 128/255.0, 128/255.0); //nice gray color
+    glColor3f(128/255.0, 128/255.0, 128/255.0);
     
-    //x
     glBegin(GL_LINES);
-    glVertex3f(-20, 0, 0);
-    glVertex3f(20, 0, 0);
-    glEnd();
+        //x
+        glVertex3f(-20, 0, 0);
+        glVertex3f(+20, 0, 0);
     
+        //Y
+        glVertex3f( 0 ,-20, 0);
+        glVertex3f(	0, +20, 0);
     
-    //y
-    glBegin(GL_LINES);
-    glVertex3f(0, -20, 0);
-    glVertex3f(0, 20, 0);
-    glEnd();
-    
-    
-    //z
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, -20);
-    glVertex3f(0, 0, 20);
-    glEnd();
+        //Z
+        glVertex3f( 0, 0,-20);
+        glVertex3f(	0, 0, +20);
+	glEnd();
 }
+
 void drawGrids(){
     float offset; int gd;
-	glBegin(GL_LINES);
-    glColor3f(1, 0, 0);
-    glVertex3f(-20, 0, 0);
-    glVertex3f(+20, 0, 0);
-    glVertex3f( 0 ,-20, 0);
-    glVertex3f(	0, +20, 0);
-    glVertex3f( 0, 0,-20);
-    glVertex3f(	0, 0, +20);
-    
-	glEnd();
+    glColor3f(128/255.0, 128/255.0, 128/255.0);
 	
 	glLineStipple(1, 0xAAAA); //line style = fine dots
 	glEnable(GL_LINE_STIPPLE);
@@ -125,7 +113,6 @@ void drawGrids(){
 	glBegin(GL_LINES);
     
     if (x_y_display) {
-        glColor3f(0.0,0.7,0.7);
 		for (offset=-10.0;offset<10.1;offset++){
 			//draw lines in x-y plane
 			glVertex3f(-10.0, offset, 0.0);					// Top Left
@@ -135,7 +122,6 @@ void drawGrids(){
 		}}
     
     if (y_z_display) {
-        glColor3f(0.7,0.0,0.7);
 		for (offset=-10.0;offset<10.1;offset++){
 			//draw lines in y-z plane
 			glVertex3f( 0, offset, -10);
@@ -145,7 +131,6 @@ void drawGrids(){
 		}}
     
     if (x_z_display) {
-        glColor3f(0.7,0.7,0.0);
 		for (offset=-10.0;offset<10.1;offset++){
 			//draw lines in x-z plane
 			glVertex3f( offset, 0, -10);
@@ -157,59 +142,6 @@ void drawGrids(){
 	glEnd();
 	glDisable(GL_LINE_STIPPLE);
 }
-
-
-
-
-
-
-
-
-void keyboardDown(unsigned char key, int x,int y){
-    if (key =='f') {
-        flapFish = !flapFish;
-    }
-    if (key == 'F') {
-        flapFirst = !flapFirst;
-    }
-    if (key == 'v') {
-        flapFin = !flapFin;
-    }
-    if (key == '+') {
-        G_zoom*=1.5;
-    }
-    if (key == '-') {
-        G_zoom/=1.5;
-    }
-    if (key == 'd') {
-        disco=!disco;
-    }
-    
-    if (key == '1') {
-        swimSpeed = 10;
-    }
-    
-    if (key == '2') {
-        swimSpeed = 100;
-    }
-    
-    if (key == 'l') {
-        displayLines = !displayLines;
-    }
-    
-    
-    glutPostRedisplay();
-    
-    
-}
-
-
-
-
-
-
-
-
 
 void drawBodyPiece(){
     glPushMatrix();
@@ -223,7 +155,6 @@ void drawBodyPiece(){
         }
     glPopMatrix();
 }
-
 
 void randomColour(){
     glColor3f(arc4random()%255/255.0, arc4random()%255/255.0, arc4random()%255/255.0);
@@ -290,7 +221,6 @@ void drawBottomFin(){
     glPopMatrix();
 }
 
-
 void drawBody(){
     glTranslatef(-0.5, 0, 0);
     drawBodyPiece();
@@ -356,6 +286,7 @@ void drawScene(){
     if (displayLines) {
         drawAxes();
     }
+    
     drawGrids();
     
     if (disco) {
@@ -440,16 +371,14 @@ static void Timer(int value){
     glutTimerFunc(swimSpeed, Timer, 0);
 }
 
-void mouseMotionCallBack(int x, int y)
-{
+void mouseMotionCallBack(int x, int y){
 	// Called when the Mouse is moved with left button down
 	G_theta[0] = pitch0 + (y - mouseY0);
     G_theta[1] = yaw0 + (x - mouseX0);
 	glutPostRedisplay();
 }
 
-void mouseClickCallBack(int button, int state, int x, int y)
-{
+void mouseClickCallBack(int button, int state, int x, int y){
 	// Called on button press or release
     switch (state)
     {
@@ -466,6 +395,50 @@ void mouseClickCallBack(int button, int state, int x, int y)
     }
 }
 
+void action(unsigned char key){
+	switch(key){
+        case '1': displayLines = !displayLines; break;
+        case '2': x_y_display= !x_y_display; break;
+        case '3': y_z_display= !y_z_display; break;
+        case '4': x_z_display= !x_z_display; break;
+        case 'q': G_zoom*=1.5; break;
+        case 'w': G_zoom/=1.5; break;
+        case 'a': flapFish = !flapFish; break;
+        case 's': flapFin = !flapFin; break;
+        case 'd': swimSpeed = 10; break;
+        case 'f': swimSpeed = 100; break;
+        case 'x': disco=!disco; break;
+	}
+	glutPostRedisplay();
+}
+
+void menuCallback (int id) {
+      action(id);
+}
+
+void keyboardDown(unsigned char key, int x,int y){
+    action(key);
+}
+
+
+void loadMenu(){
+	// This is the menu shown when you right click on the program display.
+	glutCreateMenu(menuCallback);
+	glutAddMenuEntry("Show XYZ Lines[1]", '1');
+	glutAddMenuEntry("Show XY Grid[2]", '2');
+	glutAddMenuEntry("Show YZ Grid[3]", '3');
+	glutAddMenuEntry("Show XZ Grid[4]", '4');
+	glutAddMenuEntry("Zoom in[q]", 'q');
+	glutAddMenuEntry("Zoom out[w]", 'w');
+	glutAddMenuEntry("Flap fins[s]", 's');
+	glutAddMenuEntry("Swim[a]", 'a');
+	glutAddMenuEntry("Swim fast[d]", 'd');
+	glutAddMenuEntry("Swim slow[f]", 'f');
+	glutAddMenuEntry("Disco[x]", 'x');
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+
 int main(int argc, char ** argv){
     
     glutInit(&argc, argv);
@@ -474,21 +447,15 @@ int main(int argc, char ** argv){
     glutInitDisplayMode(GLUT_SINGLE | GLUT_DEPTH | GLUT_RGBA);
     glutCreateWindow("Shark - Graphics Project");
     glEnable(GL_DEPTH_TEST);
-    
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
     glutIdleFunc(display);
-    
     glutKeyboardFunc(keyboardDown);
-
-
-    
-   
     glutMouseFunc(mouseClickCallBack);
     glutMotionFunc(mouseMotionCallBack);
-    
-    
     Timer(0);
+    
+    loadMenu();
     
     
     glutMainLoop();
