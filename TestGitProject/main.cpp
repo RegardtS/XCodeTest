@@ -34,6 +34,10 @@
 
 
 
+
+
+
+
 const int WINDOW_W = 1920;
 const int WINDOW_H = 1080;
 
@@ -155,12 +159,12 @@ void drawBodyPiece(){
         glRotatef(90, 1, 0, 0);
         glRotatef(90, 0, 1, 0);
     
-        Letter_M::drawM();
+        drawM();
     
         for (int i = 0; i != 3; i++) {
             glTranslatef(-0.5, 0, 0.5);
             glRotatef(90, 0, 1, 0);
-            Letter_M::drawM();
+            drawM();
         }
     
     glPopMatrix();
@@ -187,9 +191,7 @@ void display(){
     
     drawAxes();
     
-    
 
-    
     
     
     
@@ -202,9 +204,9 @@ void display(){
         glRotatef(270, 0, 1, 0);
         glRotatef(180, 0, 1, 0);
         glScalef(0.5, 0.5, 0.5);
-        Letter_R::drawR();
+        drawR();
         glTranslatef(0, 0, 1.5);
-        Letter_R::drawR();
+        drawR();
     glPopMatrix();
 
     
@@ -225,7 +227,7 @@ void display(){
                 glRotatef(180, 0, 0, 1);
             
                 glScalef(0.5, 0.5, 0.5);
-                Letter_B::drawB();
+                drawB();
             glPopMatrix();
             
             
@@ -243,7 +245,7 @@ void display(){
             
             
             
-                Letter_S::drawS();
+               drawS();
             
             
             
@@ -270,7 +272,7 @@ void display(){
         glTranslatef(0.5, 0.5, 1);
         glRotatef(-90, 0, 1, 0);
         glRotatef(-45, 0, 0, 1);
-        Letter_F::drawF();
+        drawF();
     glPopMatrix();
     
     
@@ -280,7 +282,7 @@ void display(){
         glRotatef(-90, 0, 1, 0);
         glRotatef(-135, 0, 0, 1);
         glScalef(0.5, 0.5, 0.5);
-        Letter_T::drawT();
+        drawT();
     glPopMatrix();
     
     

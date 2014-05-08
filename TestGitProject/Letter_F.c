@@ -13,7 +13,7 @@
 #include <GLUT/glut.h>
 
 
-void Letter_F::drawF(){
+void drawF(){
     
     glPushMatrix();
     

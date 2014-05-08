@@ -15,12 +15,12 @@
 #include "Curve.h"
 
 
-void Letter_S::drawS(){
+void drawS(){
     glPushMatrix();
         glTranslatef(0,0.6, 0);
-    Curve::drawCurve(0, 270);
+        drawCurve(0, 270);
         glTranslatef(0,-1.2, 0);
         glRotatef(180, 0, 1, 0);
-        Curve::drawCurve(90, 360);
+        drawCurve(90, 360);
     glPopMatrix();
 }

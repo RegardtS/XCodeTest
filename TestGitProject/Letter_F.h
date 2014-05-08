@@ -6,15 +6,11 @@
 //  Copyright (c) 2014 Saint. All rights reserved.
 //
 
-#ifndef __TestGitProject__Letter_F__
-#define __TestGitProject__Letter_F__
 
-#include <iostream>
-
-#endif /* defined(__TestGitProject__Letter_F__) */
-
-
-class Letter_F {
-public:
-    static void drawF();
+#if defined __cplusplus
+extern "C" {
+#endif
+    extern void drawF();
+#if defined __cplusplus
 };
+#endif

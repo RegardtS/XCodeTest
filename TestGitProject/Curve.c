@@ -12,7 +12,7 @@
 #include <GLUT/glut.h>
 
 #include <math.h>
-#include <cmath>
+//#include <cmath>
 
 
 #define PI 3.142
@@ -21,18 +21,18 @@
 
 float cF = PI / 180.0;
 
-double Curve::degreesToRadians(double degrees){
+double degreesToRadians(double degrees){
     return degrees * M_PI/180;
 }
-double Curve::dsin(double theta){
+double dsin(double theta){
     return sin(degreesToRadians(theta));
 }
-double Curve::dcos(double theta){
+double dcos(double theta){
     return cos(degreesToRadians(theta));
 }
 
 
-void Curve::drawCurve(float startAngle, float stopAngle) {
+void drawCurve(float startAngle, float stopAngle) {
     // near surface
     glBegin(GL_QUAD_STRIP);
     for (float theta = startAngle; theta <= stopAngle; theta = theta + 1.0) {

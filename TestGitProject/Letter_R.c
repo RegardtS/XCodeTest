@@ -13,7 +13,7 @@
 #include "Curve.h"
 
 
-void Letter_R::drawR(){
+void drawR(){
     glPushMatrix();
         glRotatef(180, 0, 1, 0);
     
@@ -27,7 +27,7 @@ void Letter_R::drawR(){
         glPushMatrix();
             glTranslatef(-0.4, 0.5, 0);
             glRotatef(-45, 0, 0, 1);
-            Curve::drawCurve(90, 360);
+            drawCurve(90, 360);
         glPopMatrix();
     
         glPushMatrix();

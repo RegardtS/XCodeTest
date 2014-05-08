@@ -13,7 +13,7 @@
 #include <GLUT/glut.h>
 
 
-void Letter_M::drawM(){
+void drawM(){
     
     glPushMatrix();
         glScalef(0.2,1,0.3);

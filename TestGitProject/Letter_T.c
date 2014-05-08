@@ -13,7 +13,7 @@
 
 
 
-void Letter_T::drawT(){
+void drawT(){
     glPushMatrix();
         glPushMatrix();
             glScalef(0.2, 2.5,1);
