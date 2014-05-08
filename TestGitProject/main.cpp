@@ -21,9 +21,7 @@
 
 #include <iostream>
 #include <cmath>
-#include "Mouse.h"
 
-#import "Vector3f.h"
 
 #include "Letter_S.h"
 #include "Letter_R.h"
@@ -39,28 +37,14 @@
 const int WINDOW_W = 1920;
 const int WINDOW_H = 1080;
 
-const float MOUSE_SENSITIVITY = 1;
-const float WALKING_SPEED = 1;
-const float MAX_TILT = 85;
 
-float LAST_TIME;
-float CURRENT_TIME;
-float DELTA_TIME;
+//for view control
+static float G_theta[3]; // View X,Y,Z
+static float G_zoom=0.3;
 
-int MOUSE_LAST_X;
-int MOUSE_LAST_Y;
-int MOUSE_CURRENT_X;
-int MOUSE_CURRENT_Y;
-int MOUSE_DELTA_X;
-int MOUSE_DELTA_Y;
-
-
-
-Vector3f CAMERA_POSITION;
-Vector3f CAMERA_ROTATION;
-
-
-bool KEYS[256];
+bool MousePressed; // Used in Mouse Drag to change the Viewpoint
+float pitch0, yaw0;
+int mouseX0, mouseY0;
 
 
 bool flapFish = false;
@@ -74,14 +58,15 @@ float finRotation = 0;
 
 
 void reshape(int w, int h){
-    if (h == 0){
-        h = 1;
-    }
-    float ratio = (float) w / h;
+    glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glViewport(0,0, w, h);
-    gluPerspective(45,ratio,0.01,1000);
+    if (w <= h)
+        glOrtho(-2.0, 2.0, -2.0 * (float) h / (float) w,
+				2.0 * (float) h / (float) w, -10.0, 10.0);
+    else
+        glOrtho(-2.0 * (float) w / (float) h,
+				2.0 * (float) w / (float) h, -2.0, 2.0, -10.0, 10.0);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -140,88 +125,26 @@ void drawAxes(){
 
 
 void keyboardDown(unsigned char key, int x,int y){
-    KEYS[key] = true;
-    
-    if (KEYS['f']) {
+    if (key =='f') {
         flapFish = !flapFish;
     }
-    if (KEYS['F']) {
+    if (key == 'F') {
         flapFirst = !flapFirst;
     }
-    if (KEYS['v']) {
+    if (key == 'v') {
         finRotation+=10;
-        
     }
-    
-    
-    
-    
-    
-}
-
-void keyboardUp(unsigned char key, int x,int y){
-    KEYS[key] = false;
-    
-    
-    
+    if (key == '+') {
+        G_zoom*=1.5;
+    }
+    if (key == '-') {
+        G_zoom/=1.5;
+    }
 }
 
 
-void preProcessEvents(){
-    
-    
-    //UPDATE GLOBAL
-    CURRENT_TIME = ((float) glutGet(GLUT_ELAPSED_TIME))/1000;
-    DELTA_TIME = CURRENT_TIME - LAST_TIME;
-    LAST_TIME = CURRENT_TIME;
-    
-    Mouse::update();
-    
-    
-    //PROCESS MOUSE
-    CAMERA_ROTATION.y += (float)Mouse::deltaX*MOUSE_SENSITIVITY;
-    CAMERA_ROTATION.x += (float)Mouse::deltaY*MOUSE_SENSITIVITY;
-    
-    if (CAMERA_ROTATION.x > MAX_TILT) {
-        CAMERA_ROTATION.x = MAX_TILT;
-    }
-    if (CAMERA_ROTATION.x < -MAX_TILT) {
-        CAMERA_ROTATION.x = -MAX_TILT;
-    }
-    
-    
-    //PROCESS KEYS
-    
-    if (KEYS['w']) {
-        CAMERA_POSITION.x += (WALKING_SPEED*DELTA_TIME) * Curve::dsin(CAMERA_ROTATION.y);
-        CAMERA_POSITION.z += (WALKING_SPEED*DELTA_TIME) * Curve::dcos(CAMERA_ROTATION.y);
-    }
-    if (KEYS['s']) {
-        CAMERA_POSITION.x += (WALKING_SPEED*DELTA_TIME) * Curve::dsin(CAMERA_ROTATION.y + 180);
-        CAMERA_POSITION.z += (WALKING_SPEED*DELTA_TIME) * Curve::dcos(CAMERA_ROTATION.y + 180);
-    }
-    if (KEYS['a']) {
-        CAMERA_POSITION.x += (WALKING_SPEED*DELTA_TIME) * Curve::dsin(CAMERA_ROTATION.y + 270);
-        CAMERA_POSITION.z += (WALKING_SPEED*DELTA_TIME) * Curve::dcos(CAMERA_ROTATION.y + 270);
-    }
-    if (KEYS['d']) {
-        CAMERA_POSITION.x += (WALKING_SPEED*DELTA_TIME) * Curve::dsin(CAMERA_ROTATION.y + 90);
-        CAMERA_POSITION.z += (WALKING_SPEED*DELTA_TIME) * Curve::dcos(CAMERA_ROTATION.y + 90);
-    }
 
-    if (KEYS[' ']) {
-        CAMERA_POSITION.y += 0.01;
-    }
-    if (KEYS['z']){
-        CAMERA_POSITION.y -= 0.01;
-    }
 
-    
-    
-    
-    
-    
-}
 
 
 
@@ -247,22 +170,25 @@ void drawBodyPiece(){
 
 
 void display(){
-    preProcessEvents();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(99/255.0, 173/255.0, 208/255.0, 1);
     glLoadIdentity();
     
     
-    glTranslatef(-CAMERA_POSITION.x, -CAMERA_POSITION.y, CAMERA_POSITION.z);
+	//Rotate everything
+	glRotatef(G_theta[0], 1.0, 0.0, 0.0);
+	glRotatef(G_theta[1], 0.0, 1.0, 0.0);
+	glRotatef(G_theta[2], 0.0, 0.0, 1.0);
     
-    glRotatef(CAMERA_ROTATION.x, 1, 0, 0);
-    glRotatef(CAMERA_ROTATION.y, 0, 1, 0);
-    glRotatef(CAMERA_ROTATION.z, 0, 0, 1);
+	//zoom (NB glOrtho projection)
+	glScalef(G_zoom,G_zoom,G_zoom);
+    
+   
     
     drawAxes();
     
     
-    glScalef(0.1, 0.1, 0.1);
+
     
     
     
@@ -412,9 +338,35 @@ static void Timer(int value){
     glutTimerFunc(100, Timer, 0);
 }
 
+void mouseMotionCallBack(int x, int y)
+{
+	// Called when the Mouse is moved with left button down
+	G_theta[0] = pitch0 + (y - mouseY0);
+    G_theta[1] = yaw0 + (x - mouseX0);
+	glutPostRedisplay();
+}
+
+void mouseClickCallBack(int button, int state, int x, int y)
+{
+	// Called on button press or release
+    switch (state)
+    {
+		case GLUT_DOWN:
+			MousePressed = true;
+			pitch0 = G_theta[0];
+			yaw0 = G_theta[1];
+			mouseX0 = x; mouseY0 = y;
+			break;
+		default:
+		case GLUT_UP:
+			MousePressed = false;
+			break;
+    }
+}
+
 int main(int argc, char ** argv){
     
-    CAMERA_POSITION.z = -1;
+    //CAMERA_POSITION.z = -1;
     
     //CAMERA_ROTATION.x = 10;
     //aCAMERA_ROTATION.y = 10;
@@ -433,9 +385,11 @@ int main(int argc, char ** argv){
     glutIdleFunc(display);
     
     glutKeyboardFunc(keyboardDown);
-    glutKeyboardUpFunc(keyboardUp);
-    glutMotionFunc(Mouse::move);
-    glutPassiveMotionFunc(Mouse::move);
+
+   
+    glutMouseFunc(mouseClickCallBack);
+    glutMotionFunc(mouseMotionCallBack);
+    
     
     Timer(0);
     
