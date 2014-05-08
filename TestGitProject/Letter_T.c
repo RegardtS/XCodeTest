@@ -11,23 +11,31 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 
+void drawMainLineT(){
+    glPushMatrix();
+        glScalef(0.2, 2.5,1);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
+    glPopMatrix();
+}
+
+void drawTopLineT(){
+    glPushMatrix();
+        glTranslatef(0, 1.2, 0);
+        glScalef(2, 0.2, 1);
+        glRotatef(90, 1, 0, 0);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
+    glPopMatrix();
+}
+
 
 
 void drawT(){
     glPushMatrix();
-        glPushMatrix();
-            glScalef(0.2, 2.5,1);
-            glBegin(GL_POLYGON);
-                glutSolidCube(1);
-            glEnd();
-        glPopMatrix();
-        glPushMatrix();
-            glTranslatef(0, 1.2, 0);
-            glScalef(2, 0.2, 1);
-            glRotatef(90, 1, 0, 0);
-            glBegin(GL_POLYGON);
-                glutSolidCube(1);
-            glEnd();
-        glPopMatrix();
+        drawMainLineT();
+        drawTopLineT();
     glPopMatrix();
 }

@@ -12,33 +12,40 @@
 #include <GLUT/glut.h>
 #include "Curve.h"
 
+void drawMainLine(){
+    glPushMatrix();
+        glScalef(0.2, 2.5,1);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
+    glPopMatrix();
+}
+
+void drawMainCurve(){
+    glPushMatrix();
+        glTranslatef(-0.4, 0.5, 0);
+        glRotatef(-45, 0, 0, 1);
+        drawCurve(90, 360);
+    glPopMatrix();
+}
+
+void drawSideLine(){
+    glPushMatrix();
+        glTranslatef(-0.5, -0.6, 0);
+        glRotatef(-40, 0, 0, 1);
+        glScalef(0.2, 1.5,1);
+        glBegin(GL_POLYGON);
+            glutSolidCube(1);
+        glEnd();
+    glPopMatrix();
+}
 
 void drawR(){
     glPushMatrix();
         glRotatef(180, 0, 1, 0);
-    
-        glPushMatrix();
-            glScalef(0.2, 2.5,1);
-            glBegin(GL_POLYGON);
-                glutSolidCube(1);
-            glEnd();
-        glPopMatrix();
-    
-        glPushMatrix();
-            glTranslatef(-0.4, 0.5, 0);
-            glRotatef(-45, 0, 0, 1);
-            drawCurve(90, 360);
-        glPopMatrix();
-    
-        glPushMatrix();
-            glTranslatef(-0.5, -0.6, 0);
-            glRotatef(-40, 0, 0, 1);
-            glScalef(0.2, 1.5,1);
-            glBegin(GL_POLYGON);
-                glutSolidCube(1);
-            glEnd();
-        glPopMatrix();
-    
+        drawMainLine();
+        drawMainCurve();
+        drawSideLine();
     glPopMatrix();
 
 }

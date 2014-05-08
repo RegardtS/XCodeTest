@@ -13,8 +13,7 @@
 #include <GLUT/glut.h>
 
 
-void drawM(){
-    
+void drawMainLinesM(){
     glPushMatrix();
         glScalef(0.2,1,0.3);
         glTranslatef(-2,0,0);
@@ -26,26 +25,33 @@ void drawM(){
             glutSolidCube(1);
         glEnd();
 	glPopMatrix();
-    
-	glPushMatrix();
+}
+
+void drawLeftLineM(){
+    glPushMatrix();
         glTranslatef(-0.17,0.17,0);
         glRotatef(45,0,0,1);
         glScalef(0.2,0.7,0.3);
-    
         glBegin(GL_POLYGON);
             glutSolidCube(1);
         glEnd();
-    
-        glPopMatrix();
-    
+    glPopMatrix();
+}
+
+void drawRightLineM(){
     glPushMatrix();
-    
         glTranslatef(0.17,0.17,0);
         glRotatef(-45,0,0,1);
         glScalef(0.2,0.7,0.3);
-    
         glBegin(GL_POLYGON);
             glutSolidCube(1);
         glEnd();
 	glPopMatrix();
+}
+
+void drawM(){
+    drawMainLinesM();
+	drawLeftLineM();
+    drawRightLineM();
+    
 }

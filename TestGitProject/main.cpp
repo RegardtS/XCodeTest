@@ -42,6 +42,9 @@ const int WINDOW_W = 1920;
 const int WINDOW_H = 1080;
 
 
+int x_y_display=0, y_z_display=0, x_z_display=0;
+
+
 //for view control
 static float G_theta[3]; // View X,Y,Z
 static float G_zoom=0.3;
@@ -53,12 +56,16 @@ int mouseX0, mouseY0;
 
 bool flapFish = false;
 bool flapFirst = false;
+bool disco = false;
+bool displayLines = true;
+bool flapFin = false;
+bool flapFinFirst = true;
 
 
 float rotationAngle = 0;
 float finRotation = 0;
 
-
+int swimSpeed = 10;
 
 
 void reshape(int w, int h){
@@ -74,21 +81,12 @@ void reshape(int w, int h){
     glMatrixMode(GL_MODELVIEW);
 }
 
-void displayText( float x, float y, int r, int g, int b, const char *string ) {
-    int j = strlen( string );
-    
-    glColor3f( r, g, b );
-    glRasterPos2f( x, y );
-    for( int i = 0; i < j; i++ ) {
-        glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, string[i] );
-    }
-}
+
 
 void drawAxes(){
-//    glColor3f(128/255.0, 128/255.0, 128/255.0); //nice gray color
+    glColor3f(128/255.0, 128/255.0, 128/255.0); //nice gray color
     
     //x
-    glColor3f(1, 0, 0);
     glBegin(GL_LINES);
     glVertex3f(-20, 0, 0);
     glVertex3f(20, 0, 0);
@@ -96,7 +94,6 @@ void drawAxes(){
     
     
     //y
-    glColor3f(0, 1, 0);
     glBegin(GL_LINES);
     glVertex3f(0, -20, 0);
     glVertex3f(0, 20, 0);
@@ -104,22 +101,62 @@ void drawAxes(){
     
     
     //z
-    glColor3f(0, 0, 1);
     glBegin(GL_LINES);
     glVertex3f(0, 0, -20);
     glVertex3f(0, 0, 20);
     glEnd();
-    
-    
-    //alt way to write text
-    displayText(0.5, 0, 1, 0, 0, "X");
-    displayText(-0.5, 0, 1, 0, 0, "X");
-    
-    displayText(0,0.5, 0, 1,0, "Y");
-    displayText(0,-0.5, 0,1, 0, "Y");
-    
 }
-
+void drawGrids(){
+    float offset; int gd;
+	glBegin(GL_LINES);
+    glColor3f(1, 0, 0);
+    glVertex3f(-20, 0, 0);
+    glVertex3f(+20, 0, 0);
+    glVertex3f( 0 ,-20, 0);
+    glVertex3f(	0, +20, 0);
+    glVertex3f( 0, 0,-20);
+    glVertex3f(	0, 0, +20);
+    
+	glEnd();
+	
+	glLineStipple(1, 0xAAAA); //line style = fine dots
+	glEnable(GL_LINE_STIPPLE);
+    
+	glBegin(GL_LINES);
+    
+    if (x_y_display) {
+        glColor3f(0.0,0.7,0.7);
+		for (offset=-10.0;offset<10.1;offset++){
+			//draw lines in x-y plane
+			glVertex3f(-10.0, offset, 0.0);					// Top Left
+			glVertex3f(+10.0, offset, 0.0);					// Top Right
+			glVertex3f( offset,-10, 0.0);					// Bottom Right
+			glVertex3f(	offset,+10.0, 0.0);					// Bottom Left
+		}}
+    
+    if (y_z_display) {
+        glColor3f(0.7,0.0,0.7);
+		for (offset=-10.0;offset<10.1;offset++){
+			//draw lines in y-z plane
+			glVertex3f( 0, offset, -10);
+			glVertex3f(	0, offset, 10.0);
+			glVertex3f( 0, -10, offset);
+			glVertex3f(	0, 10, offset);
+		}}
+    
+    if (x_z_display) {
+        glColor3f(0.7,0.7,0.0);
+		for (offset=-10.0;offset<10.1;offset++){
+			//draw lines in x-z plane
+			glVertex3f( offset, 0, -10);
+			glVertex3f(	offset, 0, 10.0);
+			glVertex3f( -10, 0, offset);
+			glVertex3f(	10, 0, offset);
+		}}
+    
+	glEnd();
+	glDisable(GL_LINE_STIPPLE);
+}
 
 
 
@@ -136,7 +173,7 @@ void keyboardDown(unsigned char key, int x,int y){
         flapFirst = !flapFirst;
     }
     if (key == 'v') {
-        finRotation+=10;
+        flapFin = !flapFin;
     }
     if (key == '+') {
         G_zoom*=1.5;
@@ -144,6 +181,26 @@ void keyboardDown(unsigned char key, int x,int y){
     if (key == '-') {
         G_zoom/=1.5;
     }
+    if (key == 'd') {
+        disco=!disco;
+    }
+    
+    if (key == '1') {
+        swimSpeed = 10;
+    }
+    
+    if (key == '2') {
+        swimSpeed = 100;
+    }
+    
+    if (key == 'l') {
+        displayLines = !displayLines;
+    }
+    
+    
+    glutPostRedisplay();
+    
+    
 }
 
 
@@ -158,26 +215,22 @@ void drawBodyPiece(){
     glPushMatrix();
         glRotatef(90, 1, 0, 0);
         glRotatef(90, 0, 1, 0);
-    
         drawM();
-    
         for (int i = 0; i != 3; i++) {
             glTranslatef(-0.5, 0, 0.5);
             glRotatef(90, 0, 1, 0);
             drawM();
         }
-    
     glPopMatrix();
 }
 
 
+void randomColour(){
+    glColor3f(arc4random()%255/255.0, arc4random()%255/255.0, arc4random()%255/255.0);
+}
 
-
-void display(){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(99/255.0, 173/255.0, 208/255.0, 1);
+void viewControl(){
     glLoadIdentity();
-    
     
 	//Rotate everything
 	glRotatef(G_theta[0], 1.0, 0.0, 0.0);
@@ -187,18 +240,9 @@ void display(){
 	//zoom (NB glOrtho projection)
 	glScalef(G_zoom,G_zoom,G_zoom);
     
-   
-    
-    drawAxes();
-    
+}
 
-    
-    
-    
-    
-    
-    
-    //DRAWS THE EYES WITH THE LETTER R
+void drawEyes(){
     glPushMatrix();
         glTranslatef(-0.375, 0, -0.5);
         glRotatef(270, 0, 1, 0);
@@ -208,66 +252,82 @@ void display(){
         glTranslatef(0, 0, 1.5);
         drawR();
     glPopMatrix();
+}
 
+void drawTopFin(){
+    glPushMatrix();
+        glTranslatef(-0.3, 0, 0);
+        glRotatef(90, 1, 0, 0);
+        glRotatef(180, 0, 0, 1);
+        glRotatef(finRotation, 0, 0, 1);
+        glScalef(0.5, 0.5, 0.5);
+        drawB();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.3, 0, 0);
+        glRotatef(90, 1, 0, 0);
+        glRotatef(-finRotation, 0, 0, 1);
+        glScalef(0.5, 0.5, 0.5);
+        drawB();
+    glPopMatrix();
     
-    
-    
-    glColor3f(1, 0, 0);
+    glPushMatrix();
+        glTranslatef(0, -1, 0);
+        glRotatef(-45, 0, 0, 1);
+        glRotatef(finRotation, 1, 0, 0);
+        glScalef(0.5, 0.5, 0.5);
+    glPopMatrix();
+}
+
+void drawBottomFin(){
+    glPushMatrix();
+        glTranslatef(0.5, 1, 0);
+        glRotatef(90, 1, 0, 0);
+        glRotatef(90, 0, 1, 0);
+        glScalef(0.5, 0.5, 0.5);
+        drawS();
+    glPopMatrix();
+}
+
+
+void drawBody(){
     glTranslatef(-0.5, 0, 0);
     drawBodyPiece();
-    
     for (int i = 0; i != 4; i++) {
-        
         if (i == 1) {
-            //LETTER B FIN
-            glPushMatrix();
+            if (disco) {
+                randomColour();
+            }else{
                 glColor3f(0, 0, 1);
-                glTranslatef(0.5, 1.2, 0);
-                glRotatef(90, 0, 1, 0);
-                glRotatef(180, 0, 0, 1);
-            
-                glScalef(0.5, 0.5, 0.5);
-                drawB();
-            glPopMatrix();
-            
-            
-            
-            
-            
-            //LETTER S FIN
-            glPushMatrix();
-                glTranslatef(0, -1, 0);
-                glRotatef(-45, 0, 0, 1);
-            
-                glRotatef(finRotation, 1, 0, 0);
-            
-                glScalef(0.5, 0.5, 0.5);
-            
-            
-            
-               drawS();
-            
-            
-            
-//            glTranslatef(0, 0, -2);
-//            glRotatef(90, 1, 0, 0);
-//            glColor3f(1, 0, 0);
-            //        Letter_S::drawS();
-            
-            glPopMatrix();
+            }
+            drawTopFin();
         }
         
+        if (i == 2) {
+            if (disco) {
+                randomColour();
+            }else{
+                glColor3f(166/255.0, 0, 0);
+            }
+            
+            drawBottomFin();
+        }
         
-        glColor3f(1, 0, 0);
+        if (disco) {
+            randomColour();
+        }else{
+            glColor3f(0, 133/255.0, 0);
+        }
+        
         
         glTranslatef(0, 0, 1);
         glRotatef(rotationAngle, 0, 1, 0);
         drawBodyPiece();
-        
     }
-    
-    glColor3f(1, 1, 0);
-    
+}
+
+void drawTail(){
     glPushMatrix();
         glTranslatef(0.5, 0.5, 1);
         glRotatef(-90, 0, 1, 0);
@@ -276,50 +336,69 @@ void display(){
     glPopMatrix();
     
     
-    glColor3f(1, 1, 1);
+    if (disco) {
+        randomColour();
+    }else{
+        glColor3f(230/255.0, 57/255.0, 155/255.0);
+    }
+    
+    
     glPushMatrix();
-        glTranslatef(0.5, -1, 0.75);
+        glTranslatef(0.5, -0.75, 0.75);
         glRotatef(-90, 0, 1, 0);
         glRotatef(-135, 0, 0, 1);
         glScalef(0.5, 0.5, 0.5);
         drawT();
     glPopMatrix();
-    
-    
-    
-    
-    
-    
-
-//    
-//     //DRAWS THE BACK FIN WITH THE LETTER F
-//    glPushMatrix();
-//        glTranslatef(1, 2, 0.5);
-//        glRotatef(90, 0, 0, 1);
-////        glScalef(0.5, 0.5, 0.5);
-//        Letter_F::drawF();
-//    glPopMatrix();
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    glPopMatrix();
-    
-    
-
-    
-    glFlush();
-    glutSwapBuffers();
-    
 }
 
+void drawScene(){
+    if (displayLines) {
+        drawAxes();
+    }
+    drawGrids();
+    
+    if (disco) {
+        randomColour();
+    }else{
+        glColor3f(159/255.0, 238/255.0, 0);
+    }
+    
+    drawEyes();
+    
+    
+    
+    if (disco) {
+        randomColour();
+    }else{
+        glColor3f(0, 133/255.0, 0);
+    }
+    
+    
+    drawBody();
+    
+    
+    if (disco) {
+        randomColour();
+    }else{
+        glColor3f(230/255.0, 57/255.0, 155/255.0);
+    }
+    drawTail();
+}
 
+void display(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(99/255.0, 173/255.0, 208/255.0, 1);
+    
+    viewControl();
+    drawScene();
 
+    glFlush();
+    glutSwapBuffers();
+}
 
 static void Timer(int value){
+    
     
     if (flapFish) {
         if (flapFirst) {
@@ -336,8 +415,29 @@ static void Timer(int value){
     }
     
     
+    
+   
+    
+    if (flapFin) {
+        if (flapFinFirst) {
+            finRotation+=2;
+            if (finRotation == 20) {
+                flapFinFirst = !flapFinFirst;
+            }
+        }else{
+            finRotation-=2;
+            if (finRotation == 0) {
+                flapFinFirst = !flapFinFirst;
+            }
+        }
+    }
+    
+    
+    
+    
+    
     glutPostRedisplay();
-    glutTimerFunc(100, Timer, 0);
+    glutTimerFunc(swimSpeed, Timer, 0);
 }
 
 void mouseMotionCallBack(int x, int y)
@@ -368,18 +468,11 @@ void mouseClickCallBack(int button, int state, int x, int y)
 
 int main(int argc, char ** argv){
     
-    //CAMERA_POSITION.z = -1;
-    
-    //CAMERA_ROTATION.x = 10;
-    //aCAMERA_ROTATION.y = 10;
-    //    CAMERA_ROTATION.z = 10;
-    
-    
     glutInit(&argc, argv);
     glutInitWindowPosition(0,0);
     glutInitWindowSize(WINDOW_W,WINDOW_H);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_DEPTH | GLUT_RGBA);
-    glutCreateWindow(" R S T");
+    glutCreateWindow("Shark - Graphics Project");
     glEnable(GL_DEPTH_TEST);
     
     glutReshapeFunc(reshape);
@@ -388,6 +481,8 @@ int main(int argc, char ** argv){
     
     glutKeyboardFunc(keyboardDown);
 
+
+    
    
     glutMouseFunc(mouseClickCallBack);
     glutMotionFunc(mouseMotionCallBack);
